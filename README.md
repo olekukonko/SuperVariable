@@ -1,7 +1,7 @@
 SuperVariable
 =============
 
-I simple wrapper POST, GET and REQUEST in PHP
+I simple wrapper `POST`, `GET` , `REQUEST` or any `Array` in PHP
 
 #### Config 
 
@@ -36,12 +36,15 @@ $_POST['hello'] = "Hello word";
 #### Example 1
 
 ```PHP
-$_POST = new Varriable($_POST);
-echo $_POST("hello"), PHP_EOL;
-echo $_POST->hello, PHP_EOL;
-echo $_POST['hello'], PHP_EOL;
-echo $_POST->hello(), PHP_EOL;
-echo $_POST->offsetGet("hello");
+echo $_POST['hello'], PHP_EOL; // array
+echo $_POST->hello, PHP_EOL; // object
+echo $_POST("hello"), PHP_EOL; // function
+
+echo $_POST->hello(), PHP_EOL; // methods
+echo $_POST->offsetGet("hello"), PHP_EOL; // direct
+                                 
+// Lest have more fun
+echo $_POST->find("testing.example.filter"), PHP_EOL; // access fulll array path with find
 ```
 
 #### Output 
@@ -53,7 +56,7 @@ It would all give you the same value
 	Hello word
 	Hello word
 	Hello word
-	
+	Let's meet 4:30am Ât the café	
 	
 #### Example 2
 
@@ -65,7 +68,7 @@ This class automatically handles Invalid Offset error
 $var = isset($_POST['var']) ? $_POST['var'] : null;
 
 // now
-$var = $_POST['var']; // It check for empty values automatically
+$var = $_POST['var']; // No need to check
 ```
 
 

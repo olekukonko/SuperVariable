@@ -92,7 +92,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 * @link
 	 *       http://www.php.net/manual/en/language.oop5.overloading.php#object.get
 	 */
-	function __get($offset) {
+	public function __get($offset) {
 		if ($this->flags ^ Varriable::ALLOW_GET)
 			throw new \ErrorException("You are not alloowed to get individual elements");
 		
@@ -106,8 +106,27 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 * @link
 	 *       http://www.php.net/manual/en/language.oop5.overloading.php#object.call
 	 */
-	function __call($offset, $value) {
+	public function __call($offset, $value) {
+		if (count($value) > 0) {
+			$data = $this->getValue($value);
+			var_dump($data);
+		}
 		return $this->offsetGet($offset);
+	}
+
+	/**
+	 * triggered when invoking inaccessible methods in an object context.
+	 * @param mixed $offset
+	 * @param mixed $value
+	 * @link
+	 *       http://www.php.net/manual/en/language.oop5.overloading.php#object.call
+	 */
+	public function find($path) {
+		$path = explode(".", $path);
+		if ($var = $this->offsetGet(array_shift($path))) {
+			return $this->getValue($path, $var);
+		}
+		return $var;
 	}
 
 	/**
@@ -116,7 +135,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 * @return Ambigous <NULL, multitype:>
 	 * @link http://www.php.net/manual/en/language.oop5.magic.php#object.invoke
 	 */
-	function __invoke($offset) {
+	public function __invoke($offset) {
 		return $this->offsetGet($offset);
 	}
 
@@ -181,7 +200,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 * @link
 	 *       http://www.php.net/manual/en/language.oop5.magic.php#object.tostring
 	 */
-	function __toString() {
+	public function __toString() {
 		return $this->jsonSerialize();
 	}
 
@@ -191,8 +210,16 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 * @link
 	 *       http://www.php.net/manual/en/language.oop5.overloading.php#object.isset
 	 */
-	function __isset($offset) {
+	public function __isset($offset) {
 		return $this->offsetExists($offset);
+	}
+
+	private function getValue(array $paths, array $data) {
+		$temp = $data;
+		foreach ( $paths as $ndx ) {
+			$temp = isset($temp[$ndx]) ? $temp[$ndx] : null;
+		}
+		return $temp;
 	}
 }
 
