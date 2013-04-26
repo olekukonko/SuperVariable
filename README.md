@@ -36,15 +36,31 @@ $_POST['hello'] = "Hello word";
 #### Example 1
 
 ```PHP
+/**
+ * You can Ignore some fields that should not be filtred
+ * eg Binary , XML , JSON etc;
+ */
+$_POST->ignore("image", "binary");
+
 echo $_POST['hello'], PHP_EOL; // array
 echo $_POST->hello, PHP_EOL; // object
 echo $_POST("hello"), PHP_EOL; // function
 
-echo $_POST->hello(), PHP_EOL; // methods
 echo $_POST->offsetGet("hello"), PHP_EOL; // direct
-                                 
-// Lest have more fun
-echo $_POST->find("testing.example.filter"), PHP_EOL; // access fulll array path with find
+echo $_POST->hello(), PHP_EOL; // methods
+                               
+// Lest have more fun and file array based on path
+echo $_POST->find("testing.example.filter"), PHP_EOL;
+
+// This ould not be modified because of ignore
+echo $_POST['binary'], PHP_EOL;
+
+/*
+ * This would return error because modification is disable but it can be enabled
+ * $_POST = new Varriable($_POST,null,Varriable::ALLOW_GET |
+ * Varriable::ALLOW_SET);
+ */
+echo $_POST['hello'] = "Modify";
 ```
 
 #### Output 
@@ -57,6 +73,9 @@ It would all give you the same value
 	Hello word
 	Hello word
 	Let's meet 4:30am Ât the café	
+	¯_‰”ÝMºÎâ
+	Fatal error: Uncaught exception 'ErrorException' with message 'Offset assignment disabled'
+	
 	
 #### Example 2
 

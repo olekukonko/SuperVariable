@@ -30,9 +30,10 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	                     
 	// Data Storage
 	private $data = array();
+	private $ignore = array();
+	private $offsetFilter = array();
 	private $flags;
 	private $filter = null;
-	private $offsetFilter = array();
 
 	/**
 	 *
@@ -52,6 +53,14 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 */
 	public function setData(array $array) {
 		$this->data = $array;
+	}
+
+	/**
+	 * Modify Varriable Sata
+	 * @param array $array
+	 */
+	public function ignore() {
+		$this->ignore = array_fill_keys(func_get_args(), true);
 	}
 
 	/**
@@ -157,10 +166,17 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 * @link http://www.php.net/manual/en/arrayobject.offsetget.php
 	 */
 	public function offsetGet($offset) {
-		if ($this->flags ^ Varriable::ALLOW_GET)
+		// check if you can get
+		if ($this->flags ^ Varriable::ALLOW_GET) {
 			throw new \ErrorException("Offset retrival disabled");
-			// Fild filter to use
+		}
+		
+		// Fild filter to use
 		$filter = isset($this->offsetFilter[$offset]) ? $this->offsetFilter[$offset] : $this->filter;
+		
+		// Add ignore rule
+		isset($this->ignore[$offset]) and $filter = null;
+		
 		// Illegal string-offset Fix
 		return $this->offsetExists($offset) ? ($filter ? $filter->parse($this->data[$offset]) : $this->data[$offset]) : null;
 	}

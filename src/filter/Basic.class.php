@@ -32,12 +32,12 @@ class Basic implements Parsable {
 	const FILTER_LOW = 16;
 	const FILTER_HIGH_LOW = 32;
 	const FILTER_INT = 64;
-	const FILTER_ALL = 127;
+	const FILTER_ALL = 63;
 	private $flags;
 
 	function __construct($flags = Basic::FILTER_NONE) {
 		$this->flags = $flags;
-		// var_dump(1 | 2 | 4 | 8 | 16 | 32 | 64 , 63 & 63);
+		// var_dump(1 | 2 | 4 | 8 | 16 | 32 , 63 & 63);
 	}
 
 	/**
@@ -68,9 +68,9 @@ class Basic implements Parsable {
 	function parse($mixed) {
 		if (is_string($mixed)) {
 			
-			var_dump($this->flags & self::FILTER_XSS);
-			var_dump($this->flags & self::FILTER_LOW);
-			var_dump($this->flags & self::FILTER_INT);
+			// var_dump($this->flags & self::FILTER_XSS);
+			// var_dump($this->flags & self::FILTER_LOW);
+			// var_dump($this->flags & self::FILTER_INT);
 			
 			$this->flags & self::FILTER_XSS and $mixed = htmlspecialchars($mixed, ENT_QUOTES, 'UTF-8');
 			$this->flags & self::FILTER_SQL and $mixed = $this->escape($mixed);
