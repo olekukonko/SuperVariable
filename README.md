@@ -6,7 +6,6 @@ I simple wrapper `POST`, `GET` , `REQUEST` or any `Array` in PHP
 #### Config 
 
 ```PHP
-	
 include 'src/Varriable.class.php';
 include 'src/filter/Parsable.class.php'; // Interface to allow you extend filter
 include 'src/filter/Basic.class.php'; // Basic Filter you can create yours
@@ -15,19 +14,17 @@ use \super\filter\Basic;
 use \super\Varriable;
 
 
-$var = array();
-$var["name"] = "<b>" . $_SERVER['SERVER_NAME'] . "</b>";
-$var["example"]['xss'] = '<IMG SRC=javascript:alert("XSS")>';
-$var["example"]['sql'] = "x' AND email IS NULL; --";
-$var["example"]['filter'] = "Let's meet  4:30am Ât the \tcafé\n";
-
-
-//Set fake post data
-$_POST['testing'] = $var;
+// Generate Fake post Data
+$_POST = array();
+$_POST['testing']["name"] = "<b>" . $_SERVER['SERVER_NAME'] . "</b>";
+$_POST['testing']["example"]['xss'] = '<IMG SRC=javascript:alert("XSS")>';
+$_POST['testing']["example"]['sql'] = "x' AND email IS NULL; --";
+$_POST['testing']["example"]['filter'] = "Let's meet  4:30am Ât the \tcafé\n";
 $_POST['selected'] = "ÂÂÂÂÂÂÂÂÂÂÂÂÂÂÂHello WorldÂÂÂÂÂÂÂÂÂÂÂÂÂÂÂÂÂ";
 $_POST['phone'] = "Phone+888(008)9903";
 $_POST['hello'] = "Hello word";
-
+$_POST['image'] = file_get_contents("http://i.imgur.com/YRz0AI7.png");
+$_POST['binary'] = mcrypt_create_iv(10, MCRYPT_DEV_URANDOM);
 ```
 
 
@@ -158,7 +155,7 @@ foreach (new RecursiveIteratorIterator($_POST->getRecursiveIterator()) as $k => 
 
 ####  Example 5
 
-Disable GET
+Enable SET and Disable GET
 
 ```PHP
 $_POST = new Varriable($_POST, null, Varriable::ALLOW_SET);
@@ -174,6 +171,33 @@ foreach ( $_POST as $v ) {
 
 
 
+####  Example 6
+
+Another simple type of filter is Callback 
+
+```PHP
+$callback = new Callback();
+
+// Add callback to keys when found
+$callback->add("hello", function ($value, $key) {
+	return strtoupper($value);
+});
+
+// You can also use regex with match
+$callback->match("/^hello/", function ($value, $key) {
+	return strtoupper($value);
+});
+
+$_POST = new Varriable($_POST, $callback);
+echo $_POST['hello'];
+```
+
+Output 
+
+	HELLO
+	
+	
+	
 
 #### Licence
 ##### *** Please Note that this is still exprimental

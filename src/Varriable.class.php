@@ -42,7 +42,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 * @param int $flags
 	 */
 	public function __construct($data, Parsable $filter = null, $flags = Varriable::ALLOW_GET) {
-		//Check if Traversable
+		// Check if Traversable
 		$t = $data instanceof \Traversable;
 		
 		if (! is_array($data) and $k = ! $t)
@@ -184,7 +184,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 		isset($this->ignore[$offset]) and $filter = null;
 		
 		// Illegal string-offset Fix
-		return $this->offsetExists($offset) ? ($filter ? $filter->parse($this->data[$offset]) : $this->data[$offset]) : null;
+		return $this->offsetExists($offset) ? ($filter ? $filter->parse($offset, $this->data[$offset]) : $this->data[$offset]) : null;
 	}
 
 	/**
