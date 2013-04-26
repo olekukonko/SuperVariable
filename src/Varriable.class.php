@@ -27,7 +27,7 @@ use super\filter\Parsable;
 class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	const ALLOW_SET = 1; // Allow you to set varraible (Disabled by Default)
 	const ALLOW_GET = 2; // Allow you to get varriable (Enabled By Default)
-	                     
+	const ALLOW_NONE = 4;
 	// Data Storage
 	private $data = array();
 	private $ignore = array();
@@ -41,8 +41,14 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 * @param Parsable $filter
 	 * @param int $flags
 	 */
-	public function __construct(array $array, Parsable $filter = null, $flags = Varriable::ALLOW_GET) {
-		$this->data = $array;
+	public function __construct($data, Parsable $filter = null, $flags = Varriable::ALLOW_GET) {
+		//Check if Traversable
+		$t = $data instanceof \Traversable;
+		
+		if (! is_array($data) and $k = ! $t)
+			throw new \ErrorException("Only Arrays and Traversable allowed");
+		
+		$this->data = $t ? iterator_to_array($data) : $data;
 		$this->flags = $flags;
 		$this->filter = $filter;
 	}

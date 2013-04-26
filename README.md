@@ -11,9 +11,7 @@ include 'src/Varriable.class.php';
 include 'src/filter/Parsable.class.php'; // Interface to allow you extend filter
 include 'src/filter/Basic.class.php'; // Basic Filter you can create yours
 
-use \super\filter\Parsable;
 use \super\filter\Basic;
-
 use \super\Varriable;
 
 
@@ -155,6 +153,27 @@ foreach (new RecursiveIteratorIterator($_POST->getRecursiveIterator()) as $k => 
 	echo $v, PHP_EOL;
 }
 ```
+
+
+
+####  Example 5
+
+Disable GET
+
+```PHP
+$_POST = new Varriable($_POST, null, Varriable::ALLOW_SET);
+$_POST['hello'] = "World";
+
+echo $_POST['hello']; // will return error;
+                       
+// you can only loop or convert the iterator to array
+foreach ( $_POST as $v ) {
+	print_r($v);
+}
+```
+
+
+
 
 #### Licence
 ##### *** Please Note that this is still exprimental
