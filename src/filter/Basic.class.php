@@ -65,7 +65,7 @@ class Basic implements Parsable {
 	 * @param unknown $mixed
 	 * @return mixed multitype:Ambigous
 	 */
-	function parse($mixed) {
+	function parse($key,$mixed) {
 		if (is_string($mixed)) {
 			
 			// var_dump($this->flags & self::FILTER_XSS);

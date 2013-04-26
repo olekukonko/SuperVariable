@@ -24,7 +24,7 @@ namespace super\filter;
 
 interface Parsable {
 
-	public function parse($var);
+	public function parse($key, $mixed);
 }
 
 ?>
