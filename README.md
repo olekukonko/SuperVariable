@@ -68,7 +68,6 @@ It would all give you the same value
 	Hello word
 	Hello word
 	Let's meet 4:30am Ât the café	
-	¯_‰”ÝMºÎâ
 	Fatal error: Uncaught exception 'ErrorException' with message 'Offset assignment disabled'
 	
 	
