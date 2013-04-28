@@ -23,8 +23,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * 
- * @author Oleku
+ * @author Oleku Konko
  * @license http://opensource.org/licenses/MIT
+ * @link https://github.com/olekukonko/SuperVariable/
  *        
  */
 namespace super\filter;

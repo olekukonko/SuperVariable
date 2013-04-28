@@ -31,6 +31,10 @@ $_POST['binary'] = mcrypt_create_iv(10, MCRYPT_DEV_URANDOM);
 #### Example 1
 
 ```PHP
+//Start Ignore process
+$_POST = new Varriable($_POST);
+
+
 /**
  * You can Ignore some fields that should not be filtred
  * eg Binary , XML , JSON etc;
