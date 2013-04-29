@@ -2,31 +2,10 @@
 
 /**
  *
- *
- * Copyright (c) 2013 Oleku Konko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * 
  * @author Oleku Konko
  * @license http://opensource.org/licenses/MIT
  * @link https://github.com/olekukonko/SuperVariable/
- *        
+ *      
  */
 namespace super;
 
@@ -145,7 +124,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 *       http://www.php.net/manual/en/language.oop5.overloading.php#object.call
 	 */
 	public function find($path) {
-		$path = explode(".", $path);
+		$path = array_filter(explode(".", $path));
 		if ($var = $this->offsetGet(array_shift($path))) {
 			return $this->getValue($path, $var);
 		}
@@ -246,7 +225,8 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 
 	private function getValue(array $paths, array $data) {
 		$temp = $data;
-		foreach ( $paths as $ndx ) {
+		foreach($paths as $ndx) {
+			$ndx = trim($ndx);
 			$temp = isset($temp[$ndx]) ? $temp[$ndx] : null;
 		}
 		return $temp;

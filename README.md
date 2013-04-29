@@ -31,7 +31,7 @@ $_POST['binary'] = mcrypt_create_iv(10, MCRYPT_DEV_URANDOM);
 #### Example 1
 
 ```PHP
-//Start Ignore process
+//Start super Variable
 $_POST = new Varriable($_POST);
 
 
@@ -202,7 +202,7 @@ Output
 	
 	
 
-#### Licence
+#### Licence [MIT](http://opensource.org/licenses/MIT)
 ##### *** Please Note that this is still exprimental
 
 	Copyright (c) 2013 Oleku Konko
