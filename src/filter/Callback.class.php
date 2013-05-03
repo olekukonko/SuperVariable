@@ -64,7 +64,7 @@ class Callback implements Parsable {
 		if (count($this->match) > 0) {
 			foreach ( $this->match as $condition ) {
 				if ($condition->flag & Callback::USE_KEY) {
-					var_dump($condition->callback);
+					//var_dump($condition->callback);
 					preg_match($condition->regex, $key) and $mixed = call_user_func($condition->callback, $key, $mixed);
 				}
 				

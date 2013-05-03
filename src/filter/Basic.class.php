@@ -5,7 +5,7 @@
  * @author Oleku Konko
  * @license http://opensource.org/licenses/MIT
  * @link https://github.com/olekukonko/SuperVariable/
- *        
+ *      
  */
 namespace super\filter;
 
@@ -52,7 +52,7 @@ class Basic implements Parsable {
 	 * @param unknown $mixed
 	 * @return mixed multitype:Ambigous
 	 */
-	function parse($key,$mixed) {
+	function parse($key, $mixed) {
 		if (is_string($mixed)) {
 			
 			// var_dump($this->flags & self::FILTER_XSS);
@@ -68,13 +68,24 @@ class Basic implements Parsable {
 			return $mixed;
 		}
 		
+		// Recursive array filter
 		if (is_array($mixed)) {
 			$all = array();
-			foreach ( $mixed as $data ) {
+			foreach($mixed as $data) {
 				$all[] = $this->parse($data);
 			}
 			return $all;
 		}
+		
+		// Recursive object filter
+		if (is_object($mixed)) {
+			$all = clone $mixed;
+			foreach($mixed as $k => $data) {
+				$all->{$k} = $this->parse($k, $data);
+			}
+			return $all;
+		}
+		
 		return $mixed;
 	}
 }

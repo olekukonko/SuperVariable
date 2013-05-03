@@ -203,7 +203,6 @@ Output
 	
 
 #### Licence [MIT](http://opensource.org/licenses/MIT)
-##### *** Please Note that this is still exprimental
 
 	Copyright (c) 2013 Oleku Konko
 	

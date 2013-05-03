@@ -111,7 +111,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	public function __call($offset, $value) {
 		if (count($value) > 0) {
 			$data = $this->getValue($value);
-			var_dump($data);
+			// var_dump($data);
 		}
 		return $this->offsetGet($offset);
 	}
@@ -124,7 +124,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 *       http://www.php.net/manual/en/language.oop5.overloading.php#object.call
 	 */
 	public function find($path) {
-		$path = array_filter(explode(".", $path));
+		$path = array_filter(explode(".", $path)); // remove white space
 		if ($var = $this->offsetGet(array_shift($path))) {
 			return $this->getValue($path, $var);
 		}
@@ -223,11 +223,26 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 		return $this->offsetExists($offset);
 	}
 
-	private function getValue(array $paths, array $data) {
+	/**
+	 * Get array value based on path
+	 * @param array $paths
+	 * @param array $data
+	 * @return mixed
+	 */
+	private function getValue(array $paths, $data) {
+		//var_dump(is_object($data), is_array($data));
+		if(!is_array($data) && !is_object($data))
+			return null;
+		
 		$temp = $data;
 		foreach($paths as $ndx) {
-			$ndx = trim($ndx);
-			$temp = isset($temp[$ndx]) ? $temp[$ndx] : null;
+			$ndx = trim($ndx); // remove whitespace
+			if (is_object($temp)) {
+				$temp = isset($temp->{$ndx}) ? $temp->{$ndx} : null;
+			} else {
+				$temp = isset($temp[$ndx]) ? $temp[$ndx] : null;
+			}
+			
 		}
 		return $temp;
 	}
