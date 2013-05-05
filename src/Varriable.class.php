@@ -126,9 +126,23 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	public function find($path) {
 		$path = array_filter(explode(".", $path)); // remove white space
 		if ($var = $this->offsetGet(array_shift($path))) {
-			return $this->getValue($path, $var);
+			return $this->getValue($var, $path);
 		}
 		return $var;
+	}
+
+	/**
+	 *
+	 * @param string $path
+	 * @param mixed $value
+	 * @return unknown
+	 */
+	public function inject($path, $value) {
+		$path = array_filter(explode(".", $path)); // remove white space
+		$key = $this->putValue($this->data, $path, $value);
+		
+		//var_dump($this->data['object']);
+		return $key;
 	}
 
 	/**
@@ -169,7 +183,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 		
 		// Add ignore rule
 		isset($this->ignore[$offset]) and $filter = null;
-		
+
 		// Illegal string-offset Fix
 		return $this->offsetExists($offset) ? ($filter ? $filter->parse($offset, $this->data[$offset]) : $this->data[$offset]) : null;
 	}
@@ -225,13 +239,13 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 
 	/**
 	 * Get array value based on path
-	 * @param array $paths
 	 * @param array $data
+	 * @param array $paths
 	 * @return mixed
 	 */
-	private function getValue(array $paths, $data) {
-		//var_dump(is_object($data), is_array($data));
-		if(!is_array($data) && !is_object($data))
+	private function getValue($data, array $paths) {
+		// var_dump(is_object($data), is_array($data));
+		if (! is_array($data) && ! is_object($data))
 			return null;
 		
 		$temp = $data;
@@ -242,9 +256,63 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 			} else {
 				$temp = isset($temp[$ndx]) ? $temp[$ndx] : null;
 			}
-			
 		}
 		return $temp;
+	}
+
+	/**
+	 *
+	 * @param array $data
+	 * @param array $paths
+	 * @param mixed $value
+	 * @return NULL unknown
+	 */
+	private function putValue($data, array $paths, $value) {
+		// var_dump(is_object($data), is_array($data));
+		if (! is_array($data) && ! is_object($data))
+			return null;
+		
+		$temp = &$data;
+		$last = array_pop($paths); // get last element
+		foreach($paths as $ndx) {
+			$ndx = trim($ndx); // remove whitespace
+			if (is_object($temp)) {
+				$temp = &$temp->{$ndx};
+			} else {
+				$temp = &$temp[$ndx];
+			}
+		}
+		
+		// Check if auto append
+		if ($last == "*" || $last == "$" || $last == "?") {
+			if (is_object($temp)) {
+				$var = "var";
+				$i = 0;
+				do {
+					$i ++;
+					$var = "var_$i";
+				} while(isset($temp->{$var})); // generate key
+				$temp->{$var} = $value;
+				$last = $var;
+			} else {
+				array_push($temp, $value); // add to the end
+				end($temp);
+				$last = key($temp);
+			}
+		} else {
+			
+			if (is_object($temp)) {
+				if (isset($temp->{$last}))
+					throw new \ErrorException("Can't Inject Data $last already exists");
+				$temp->{$last} = $value;
+			} else {
+				if (isset($temp[$last]))
+					throw new \ErrorException("Can't Inject Data $last already exists");
+				$temp[$last] = $value;
+			}
+		}
+		
+		return $last;
 	}
 }
 

@@ -65,14 +65,15 @@ class Basic implements Parsable {
 			$this->flags & self::FILTER_LOW and $mixed = filter_var($mixed, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 			$this->flags & self::FILTER_HIGH_LOW and $mixed = filter_var($mixed, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_ENCODE_LOW);
 			$this->flags & self::FILTER_INT and $mixed = filter_var($mixed, FILTER_SANITIZE_NUMBER_INT);
+			
 			return $mixed;
 		}
 		
 		// Recursive array filter
 		if (is_array($mixed)) {
 			$all = array();
-			foreach($mixed as $data) {
-				$all[] = $this->parse($data);
+			foreach($mixed as $k => $data) {
+				$all[] = $this->parse($k, $data);
 			}
 			return $all;
 		}
