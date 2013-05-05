@@ -145,7 +145,7 @@ Output
 	+8880089903         //after 
 	
 	
-####  Example 4
+####  Example 5
 
 Loops
 
@@ -163,7 +163,7 @@ foreach (new RecursiveIteratorIterator($_POST->getRecursiveIterator()) as $k => 
 
 
 
-####  Example 5
+####  Example 6
 
 Enable SET and Disable GET
 
@@ -181,7 +181,7 @@ foreach ( $_POST as $v ) {
 
 
 
-####  Example 6
+####  Example 7
 
 Another simple type of filter is Callback 
 
@@ -207,7 +207,7 @@ Output
 	HELLO
 	
 	
-####  Example 6
+####  Example 8
 You can easly find or inject elements at any position
 
 ```PHP
