@@ -1,10 +1,10 @@
-- [General Usage](README.md)
-- [General Usage](USAGE_GENERAL.md)
-- [Using Filters](USAGE_FILTER.md)
-
-
 Using Filters Usage
 =============
+
+#### Other Links
+
+- [Readme](README.md)
+- [General Usage](USAGE_GENERAL.md)
 
 
 #### Fake Data 
@@ -112,10 +112,4 @@ echo $_POST['hello'];
 Output 
 
 	HELLO
-	
-	
-- [General Usage](README.md)
-- [General Usage](USAGE_GENERAL.md)
-- [Using Filters](USAGE_FILTER.md)
-	
 	

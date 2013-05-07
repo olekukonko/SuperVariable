@@ -3,6 +3,8 @@ Examples
 
 I simple wrapper `POST`, `GET` , `REQUEST` or any `Array` in PHP
 
+####  Links
+
 - [General Usage](USAGE_GENERAL.md)
 - [Using Filters](USAGE_FILTER.md)
 	
@@ -29,6 +31,3 @@ echo $array->find("foo"); // returns bar
 
 
 ````
-
-- [General Usage](USAGE_GENERAL.md)
-- [Using Filters](USAGE_FILTER.md)

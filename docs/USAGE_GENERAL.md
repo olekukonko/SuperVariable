@@ -1,9 +1,15 @@
-- [General Usage](README.md)
-- [General Usage](USAGE_GENERAL.md)
-- [Using Filters](USAGE_FILTER.md)
+
 
 General Usage
 =============
+
+
+
+#### Other Links
+
+- [Readme](README.md)
+- [Using Filters](USAGE_FILTER.md)
+
 
 <h2 id="FAKE">Fake Data</h2>
 
@@ -132,8 +138,3 @@ Output
 	
 	)
 
-- [General Usage](README.md)
-- [General Usage](USAGE_GENERAL.md)
-- [Using Filters](USAGE_FILTER.md)
-	
-	
