@@ -14,13 +14,16 @@ use super\filter\Parsable;
 class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	const ALLOW_SET = 1; // Allow you to set varraible (Disabled by Default)
 	const ALLOW_GET = 2; // Allow you to get varriable (Enabled By Default)
+	const ALLOW_SET_GET = 3;
 	const ALLOW_NONE = 4;
+	
 	// Data Storage
 	private $data = array();
 	private $ignore = array();
 	private $offsetFilter = array();
 	private $flags;
 	private $filter = null;
+	private $default = null;
 
 	/**
 	 *
@@ -38,6 +41,14 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 		$this->data = $t ? iterator_to_array($data) : $data;
 		$this->flags = $flags;
 		$this->filter = $filter;
+	}
+
+	/**
+	 * Modify Default Values when Object is empty
+	 * @param array $array
+	 */
+	public function setDefault($default) {
+		$this->default = $default;
 	}
 
 	/**
@@ -141,7 +152,7 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 		$path = array_filter(explode(".", $path)); // remove white space
 		$key = $this->putValue($this->data, $path, $value);
 		
-		//var_dump($this->data['object']);
+		// var_dump($this->data['object']);
 		return $key;
 	}
 
@@ -183,9 +194,9 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 		
 		// Add ignore rule
 		isset($this->ignore[$offset]) and $filter = null;
-
+		
 		// Illegal string-offset Fix
-		return $this->offsetExists($offset) ? ($filter ? $filter->parse($offset, $this->data[$offset]) : $this->data[$offset]) : null;
+		return $this->offsetExists($offset) ? ($filter ? $filter->parse($offset, $this->data[$offset]) : $this->data[$offset]) : $this->default;
 	}
 
 	/**
