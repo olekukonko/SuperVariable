@@ -1,3 +1,6 @@
+[ReadME](README.md] | [General Usage](docs/USAGE_GENERAL.md) | [Using Filters](docs/USAGE_FILTER.md)
+
+
 Using Filters Usage
 =============
 
@@ -140,6 +143,6 @@ Output
 
 
 
-
+[ReadME](README.md] | [General Usage](docs/USAGE_GENERAL.md) | [Using Filters](docs/USAGE_FILTER.md)
 	
 	

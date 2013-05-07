@@ -68,8 +68,8 @@ It would all give you the same value
 
 
 #### More Example
-- [General Usage](USAGE_GENERAL.md)
-- [Using Filters](USAGE_FILTER.md)
+- [General Usage](docs/USAGE_GENERAL.md)
+- [Using Filters](docs/USAGE_FILTER.md)
 
 #### Licence [MIT](http://opensource.org/licenses/MIT)
 

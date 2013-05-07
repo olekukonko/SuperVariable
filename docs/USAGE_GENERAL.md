@@ -1,5 +1,8 @@
+[ReadME](README.md] | [General Usage](docs/USAGE_GENERAL.md) | [Using Filters](docs/USAGE_FILTER.md)
+
 General Usage
 =============
+
 
 - [Set Default value](#DEFAULT)
 - [Loops](#LOOPS)
@@ -7,7 +10,7 @@ General Usage
 - [Find & INJECT](#FIND)
 
 
-#### Fake Data 
+<h2 id="FAKE">Fake Data</h2>
 
 ```PHP
 // Generate Fake post Data
@@ -158,7 +161,7 @@ Output
 	 
 
 
-
+[ReadME](README.md] | [General Usage](docs/USAGE_GENERAL.md) | [Using Filters](docs/USAGE_FILTER.md)
 
 	
 	
