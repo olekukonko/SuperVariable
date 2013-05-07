@@ -32,7 +32,8 @@ $_POST['object'] = $object ;
 
 
 	
-<h2 name="DEFAULT">Set Default value</h2>
+<h2 id="DEFAULT">Set Default value</h2>
+Set default values when variable is not found
 
 ```PHP
 $_POST = new Varriable($_POST);
@@ -52,8 +53,9 @@ var_dump($_POST['var']); // returns array()
 ```
 
 
-<h2 name="LOOPS">Loops</h2>
+<h2 id="LOOPS">Loops</h2>
 
+The Class Implements `IteratorAggregate` which is `Traversable`
 
 ```PHP
 // Supports normal loop
@@ -69,9 +71,10 @@ foreach (new RecursiveIteratorIterator($_POST->getRecursiveIterator()) as $k => 
 
 
 
-<h2 name="MODIFICATION">Modification</h2>
+<h2 id="MODIFICATION">Modification</h2>
 
-Enable SET and Disable GET
+You put restriction on Modification by specifiing if variables age be `GET` or `SET` 
+The `SET is disabled by default`
 
 ```PHP
 $_POST = new Varriable($_POST, null);
@@ -91,7 +94,7 @@ foreach ( $_POST as $v ) {
 
 	
 	
-<h2 name="FIND">Find & Inject</h2>
+<h2 id="FIND">Find & Inject</h2>
 You can easly find or inject elements at any position
 
 ```PHP

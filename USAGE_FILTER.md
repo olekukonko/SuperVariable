@@ -4,7 +4,7 @@ Using Filters Usage
 - [Basic](#BASIC)
 - [Filter Specific Key](#SPECIFIC)
 - [Filter Ignore](#IGNORE)
-- [Find & INJECT](#FIND)
+- [Callback](#FIND)
 
 
 #### Fake Data 
@@ -32,8 +32,8 @@ $_POST['object'] = $object ;
 
 
 	
-<h2 name="BASIC">Basic Usage</h2>
-
+<h2 id="BASIC">Basic Usage</h2>
+You call easily filter out XSS Injection
 ```PHP
 $_POST = new Varriable($_POST, new Basic(Basic::FILTER_XSS));
 print_r($_POST['example']);
@@ -54,26 +54,9 @@ Output
 	)
 
 
-<h2 name="LOOPS">Loops</h2>
 
-
-```PHP
-// Supports normal loop
-foreach ( $_POST as $v ) {
-	print_r($v);
-}
-
-// or Recursively
-foreach (new RecursiveIteratorIterator($_POST->getRecursiveIterator()) as $k => $v ) {
-	echo $v, PHP_EOL;
-}
-```
-
-
-
-<h2 name="SPECIFIC">Filter Specific Key</h2>
-
-Enable SET and Disable GET
+<h2 id="SPECIFIC">Filter Specific Key</h2>
+You can restrict modification to your varriables.
 
 ```PHP
 //Before 
@@ -94,9 +77,9 @@ Output
 	+8880089903         //after 
 
 	
-<h2 name="IGNORE">Filter IGNORE</h2>
+<h2 id="IGNORE">Filter IGNORE</h2>
 
-You can also Ignore Binray , Hash (md5 , sha ) during Filter
+During filter process Ignore Binray , Hash (md5 , sha ) during Filter
 
 ```PHP
 $_POST = new Varriable($_POST, new Basic(Basic::FILTER_ALL,
@@ -104,7 +87,7 @@ $_POST = new Varriable($_POST, new Basic(Basic::FILTER_ALL,
 
 ```
 
-<h2 name="SPECIFIC">Callback</h2>
+<h2 id="SPECIFIC">Callback</h2>
 
 You can use Callback which also supports Regex.
 
