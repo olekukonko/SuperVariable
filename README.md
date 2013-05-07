@@ -67,7 +67,7 @@ It would all give you the same value
 	
 
 
-#### More Example
+#### More Examples
 - [General Usage](docs/USAGE_GENERAL.md)
 - [Using Filters](docs/USAGE_FILTER.md)
 
