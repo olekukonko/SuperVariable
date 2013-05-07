@@ -1,14 +1,9 @@
-[ReadME](README.md] | [General Usage](USAGE_GENERAL.md) | [Using Filters](USAGE_FILTER.md)
+- [General Usage](README.md)
+- [General Usage](USAGE_GENERAL.md)
+- [Using Filters](USAGE_FILTER.md)
 
 General Usage
 =============
-
-
-- [Set Default value](#DEFAULT)
-- [Loops](#LOOPS)
-- [Disable Modification](#MODIFICATION)
-- [Find & INJECT](#FIND)
-
 
 <h2 id="FAKE">Fake Data</h2>
 
@@ -137,9 +132,8 @@ Output
 	
 	)
 
-
-
-[ReadME](README.md] | [General Usage](USAGE_GENERAL.md) | [Using Filters](USAGE_FILTER.md)
-
+- [General Usage](README.md)
+- [General Usage](USAGE_GENERAL.md)
+- [Using Filters](USAGE_FILTER.md)
 	
 	

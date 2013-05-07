@@ -1,13 +1,10 @@
-[ReadME](README.md] | [General Usage](USAGE_GENERAL.md) | [Using Filters](USAGE_FILTER.md)
+- [General Usage](README.md)
+- [General Usage](USAGE_GENERAL.md)
+- [Using Filters](USAGE_FILTER.md)
 
 
 Using Filters Usage
 =============
-
-- [Basic](#BASIC)
-- [Filter Specific Key](#SPECIFIC)
-- [Filter Ignore](#IGNORE)
-- [Callback](#FIND)
 
 
 #### Fake Data 
@@ -117,7 +114,8 @@ Output
 	HELLO
 	
 	
-
-[ReadME](README.md] | [General Usage](USAGE_GENERAL.md) | [Using Filters](USAGE_FILTER.md)
+- [General Usage](README.md)
+- [General Usage](USAGE_GENERAL.md)
+- [Using Filters](USAGE_FILTER.md)
 	
 	

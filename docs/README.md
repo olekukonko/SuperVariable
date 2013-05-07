@@ -14,6 +14,20 @@ $array = array("foo"=>"bar")
 $array = new Varriable($array);
 echo $array['foo'] ; // returns bar
 
+
+//or
+echo $array("foo"); // returns bar
+
+//or
+echo $array->foo ; // returns bar
+
+//or
+echo $array->foo() ; // returns bar
+
+//or 
+echo $array->find("foo"); // returns bar
+
+
 ````
 
 - [General Usage](USAGE_GENERAL.md)
