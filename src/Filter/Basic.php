@@ -117,7 +117,7 @@ class Basic implements Parsable {
 		if (is_array($mixed)) {
 			$all = array();
 			foreach($mixed as $k => $data) {
-				$all[] = $this->parse($k, $data);
+				$all[$k] = $this->parse($k, $data);
 			}
 			return $all;
 		}
