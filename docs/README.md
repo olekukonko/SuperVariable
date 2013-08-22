@@ -59,9 +59,8 @@ echo $_POST->find("testing.example.filter"), PHP_EOL;
 echo $_POST['binary'], PHP_EOL;
 
 /*
- * This would return error because modification is disable but it can be enabled
- * $_POST = new Varriable($_POST,null,Varriable::ALLOW_GET |
- * Varriable::ALLOW_SET);
+ * This would return error because modification is disable by default 
+ * public function __construct($data, $flags = Varriable::DISABLE_SET) 
  */
 echo $_POST['hello'] = "Modify";
 

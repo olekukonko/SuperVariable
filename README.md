@@ -32,6 +32,7 @@ echo $array->find("foo.name"); // returns Super
 
 
 #### More Examples
+- [Full Readme](docs/README.md)
 - [General Usage](docs/USAGE_GENERAL.md)
 - [Using Filters](docs/USAGE_FILTER.md)
 
