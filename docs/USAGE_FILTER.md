@@ -36,22 +36,17 @@ $_POST['object'] = $object ;
 You call easily filter out XSS Injection
 ```PHP
 $_POST = new Varriable($_POST);
-$_POST->addFilter(new Basic(Basic::FILTER_XSS));
-print_r($_POST['example']);
+$_POST->setFilter(new Basic(Basic::FILTER_XSS));
+print_r($_POST['testing']['example']);
 ```
 
 Output
 
 	Array
 	(
-	    [0] => &lt;b&gt;localhost&lt;/b&gt;
-	    [1] => Array
-	        (
-	            [0] => &lt;IMG SRC=javascript:alert(&quot;XSS&quot;)&gt;
-	            [1] => x&#039; AND email IS NULL; --
-	            [2] => 
-	        )
-	
+	    [xss] => &lt;IMG SRC=javascript:alert(&quot;XSS&quot;)&gt;
+	    [sql] => x&#039; AND email IS NULL; --
+	    [filter] => 
 	)
 
 
@@ -84,7 +79,7 @@ During filter process Ignore Binray , Hash (md5 , sha ) during Filter
 
 ```PHP
 $_POST = new Varriable($_POST);
-$_POST->addFilter(new Basic(Basic::FILTER_ALL,
+$_POST->setFilter(new Basic(Basic::FILTER_ALL,
 		 Basic::IGNORE_BASE64 | Basic::IGNORE_HEX | Basic::IGNORE_BINARY));
 
 ```
