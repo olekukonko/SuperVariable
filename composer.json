@@ -1,0 +1,25 @@
+{
+	"name" : "oleku/supervariable",
+	"description" : "Improved PHP POST , GET Varriable",
+	"authors" : [{
+			"name" : "Oleku"
+		}
+	],
+	"keywords" : [],
+	"license" : [
+		"MIT"
+	],
+	"require-dev" : {
+		"phpunit/phpunit" : "3.7.*"
+	},
+	"autoload" : {
+		"classmap" : [
+			"src"
+		]
+	},
+	"minimum-stability" : "beta",
+	"support" : {
+		"source" : "https://github.com/olekukonko/SuperVariable",
+		"issues" : "https://github.com/olekukonko/SuperVariable/issues"
+	}
+}
