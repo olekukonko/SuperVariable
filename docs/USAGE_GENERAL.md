@@ -81,13 +81,17 @@ You put restriction on Modification by specifiing if variables age be `GET` or `
 The `SET is disabled by default`
 
 ```PHP
-$_POST = new Varriable($_POST, null);
-$_POST['hello'] = "World"; // will return because you attempt to modify
+$_POST = new Varriable($_POST,  Varriable::DISABLE_GET);
+echo $_POST['hello']; // You can not get varriables
 
-// Allow both SET AND GET only GET IS allowed by default
-$_POST = new Varriable($_POST, null,Varriable::ALLOW_SET_GET);
-$_POST['hello'] = "World"; // OK
-echo $_POST['hello']; // OK
+
+$_POST = new Varriable($_POST,  Varriable::DISABLE_SET);
+$_POST['hello'] = "World"; // You can not modify variable
+
+// Disable Set and Get
+$_POST = new Varriable($_POST,Varriable::DISABLE_ALL);
+$_POST['hello'] = "World"; // Error
+echo $_POST['hello']; // Error
                        
 // you can only loop or convert the iterator to array
 foreach ( $_POST as $v ) {
@@ -103,7 +107,8 @@ You can easly find or inject elements at any position
 
 ```PHP
 
-$_POST = new Varriable($_POST, new Basic(Basic::FILTER_XSS));
+$_POST = new Varriable($_POST);
+$_POST->addFilter(new Basic(Basic::FILTER_XSS));
 
 //Find any elements
 echo $_POST->find("object.data.bad"), PHP_EOL; 

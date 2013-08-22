@@ -6,65 +6,29 @@ I simple wrapper `POST`, `GET` , `REQUEST` or any `Array` in PHP
 #### Example 
 
 ```PHP
-include 'src/Varriable.class.php';
-include 'src/filter/Parsable.class.php'; // Interface to allow you extend filter
-include 'src/filter/Basic.class.php'; // Basic Filter you can create yours
+$array = array(
+		"foo" => "bar",
+		array(
+				"name" => "super"
+		)
+);
 
-use \super\filter\Basic;
-use \super\Varriable;
+// Start super Variable
+$array = new Varriable($array);
+// Array
+echo $array['foo'] ; // returns bar
+// Invoke
+echo $array("foo"); // returns bar
+// Object
+echo $array->foo ; // returns bar
+// Method
+echo $array->foo() ; // returns bar
+// Get via offsetGet
+echo $array->offsetGet("hello");// returns bar
 
-
-// Generate Fake post Data
-$_POST['hello'] = "Hello word";
-
-
-
-```PHP
-//Start super Variable
-$_POST = new Varriable($_POST);
-
-
-/**
- * You can Ignore some fields that should not be filtred
- * eg Binary , XML , JSON etc;
- */
- 
-$_POST->ignore("image", "binary");
-
-echo $_POST['hello'], PHP_EOL; // array
-echo $_POST->hello, PHP_EOL; // object
-echo $_POST("hello"), PHP_EOL; // function
-
-echo $_POST->offsetGet("hello"), PHP_EOL; // direct
-echo $_POST->hello(), PHP_EOL; // methods
-                               
-// Lest have more fun and file array based on path
-echo $_POST->find("testing.example.filter"), PHP_EOL;
-
-// This ould not be modified because of ignore
-echo $_POST['binary'], PHP_EOL;
-
-/*
- * This would return error because modification is disable but it can be enabled
- * $_POST = new Varriable($_POST,null,Varriable::ALLOW_GET |
- * Varriable::ALLOW_SET);
- */
-echo $_POST['hello'] = "Modify";
-
-```
-
-#### Output 
-
-It would all give you the same value 
-
-	Hello word
-	Hello word
-	Hello word
-	Hello word
-	Hello word
-	Let's meet 4:30am Ât the café	
-	Fatal error: Uncaught exception 'ErrorException' with message 'Offset assignment disabled'
-	
+// Can can also find for sub arrays or Object
+echo $array->find("foo.name"); // returns Super
+```	
 
 
 #### More Examples
