@@ -11,7 +11,7 @@ namespace Oleku\SuperVarriable;
 
 use Oleku\SuperVarriable\Filter\Parsable;
 
-class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
+class Varriable implements \ArrayAccess, \Iterator, \JsonSerializable {
 	const DISABLE_NONE = 0;
 	const DISABLE_GET = 1; // Allow you to set varraible (Disabled by Default)
 	const DISABLE_SET = 2; // Allow you to get varriable (Enabled By Default)
@@ -82,8 +82,8 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 *
 	 * @return array $array
 	 */
-	public function getData() {
-		return $this->data;
+	public function getData($raw = false) {
+		return $raw ? $this->data : iterator_to_array($this);
 	}
 	
 	/**
@@ -93,16 +93,6 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 */
 	public function ignore() {
 		$this->ignore = array_fill_keys(func_get_args(), true);
-	}
-	
-	/**
-	 * Create a new iterator from an ArrayObject instance
-	 *
-	 * @see IteratorAggregate::getIterator()
-	 * @link http://php.net/manual/en/arrayobject.getiterator.php
-	 */
-	public function getIterator() {
-		return new \ArrayIterator($this->data);
 	}
 	
 	/**
@@ -285,6 +275,55 @@ class Varriable implements \ArrayAccess, \IteratorAggregate, \JsonSerializable {
 	 */
 	public function __isset($offset) {
 		return $this->offsetExists($offset);
+	}
+	
+	/**
+	 *
+	 * @return mixed
+	 * @see Iterator::rewind()
+	 * @link http://www.php.net/manual/en/iterator.rewind.php
+	 */
+	public function rewind() {
+		return reset($this->data);
+	}
+	/**
+	 *
+	 * @return Ambigous <NULL, multitype:>
+	 * @see Iterator::current()
+	 * @link http://www.php.net/manual/en/iterator.current.php
+	 */
+	public function current() {
+		return $this->offsetGet(key($this->data));
+	}
+	/**
+	 * /* (non-PHPdoc)
+	 *
+	 * @see Iterator::key()
+	 * @link http://www.php.net/manual/en/iterator.key.php
+	 */
+	public function key() {
+		return key($this->data);
+	}
+	
+	/**
+	 *
+	 * @return Ambigous <NULL, multitype:>
+	 * @see Iterator::next()
+	 * @link http://www.php.net/manual/en/iterator.next.php
+	 */
+	public function next() {
+		$n = next($this->data);
+		return $this->offsetGet(key($this->data));
+	}
+	
+	/**
+	 *
+	 * @return boolean
+	 * @see Iterator::valid()
+	 * @link http://www.php.net/manual/en/iterator.valid.php
+	 */
+	public function valid() {
+		return key($this->data) !== null;
 	}
 	
 	/**
