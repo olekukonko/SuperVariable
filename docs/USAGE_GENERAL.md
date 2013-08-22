@@ -108,7 +108,7 @@ You can easly find or inject elements at any position
 ```PHP
 
 $_POST = new Varriable($_POST);
-$_POST->addFilter(new Basic(Basic::FILTER_XSS));
+$_POST->setFilter(new Basic(Basic::FILTER_XSS));
 
 //Find any elements
 echo $_POST->find("object.data.bad"), PHP_EOL; 
