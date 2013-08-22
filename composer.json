@@ -1,11 +1,16 @@
 {
 	"name" : "oleku/supervariable",
-	"description" : "Improved PHP POST , GET Varriable",
+	"description" : "Varriable Filter and Manipulation for Arrays vs GET, POST , etc ... Supports Callback, regex etc.",
 	"authors" : [{
 			"name" : "Oleku"
 		}
 	],
-	"keywords" : [],
+	"keywords" : [
+		"varriable",
+		"Filter",
+		"XSS",
+		"Search Array"
+	],
 	"license" : [
 		"MIT"
 	],

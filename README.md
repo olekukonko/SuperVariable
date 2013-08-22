@@ -23,11 +23,18 @@ echo $array("foo"); // returns bar
 echo $array->foo ; // returns bar
 // Method
 echo $array->foo() ; // returns bar
-// Get via offsetGet
+// Via Offset
 echo $array->offsetGet("hello");// returns bar
+
+
+// Modification is Disabled by default
+// Get via offsetGet
+array["hello"] = "World" // throws Exception
 
 // Can can also find for sub arrays or Object
 echo $array->find("foo.name"); // returns Super
+
+
 ```	
 
 
