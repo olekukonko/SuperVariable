@@ -41,11 +41,16 @@ class BasicFilterTest extends PHPUnit_Framework_TestCase {
 		return $_POST;
 	}
 	public function testFilterKey() {
-		$var = new Varriable($this->getBasicData());
-		$var->setFilter(new Basic(Basic::FILTER_XSS));
+		$_POST = new Varriable($this->getBasicData());
+		$_POST->setFilter(new Basic(Basic::FILTER_XSS));
 		
-		$this->assertEquals("bar", $var ['foo']);
-		$this->assertEquals("cute", $var ['fish'] ['water'] [0]);
+		$this->assertEquals("bar", $_POST ['foo']);
+		$this->assertEquals("cute", $_POST ['fish'] ['water'] [0]);
+	}
+	public function testFilterXSS() {
+		$_POST = new Varriable($this->getComplexData());
+		$_POST->setFilter(new Basic(Basic::FILTER_XSS));
+		$this->assertEquals("&lt;IMG SRC=javascript:alert(&quot;XSS&quot;)&gt;", $_POST ['testing'] ["example"] ['xss']);
 	}
 }
 
