@@ -96,17 +96,6 @@ class Varriable implements \ArrayAccess, \Iterator, \JsonSerializable {
 	}
 	
 	/**
-	 * This iterator allows to unset and modify values and keys while iterating
-	 * over Arrays and Objects in the same way as the ArrayIterator.
-	 * Additionally it is possible to iterate over the current iterator entry.
-	 *
-	 * @link http://php.net/manual/en/class.recursivearrayiterator.php
-	 */
-	public function getRecursiveIterator() {
-		return new \RecursiveArrayIterator($this->data);
-	}
-	
-	/**
 	 * Set a filter for a particular offset
 	 *
 	 * @param mixed $offset        	
